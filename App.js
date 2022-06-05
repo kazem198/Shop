@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider as PaperProvider } from "react-native-paper";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TabBarNavigation from "./MyShop/navigation/TabBarNavigation";
+
+import { useContext } from "react";
+import { AppContext } from "./MyShop/component/AppContext";
+import { MyContext } from "./MyShop/Context";
 
 export default function App() {
+  // const { Mytheme } = useContext(AppContext);
+  // console.log(Mytheme + "kkdkd");
+
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <MyContext>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={TabBarNavigation}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MyContext>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
